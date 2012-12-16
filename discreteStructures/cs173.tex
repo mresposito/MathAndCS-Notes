@@ -1,0 +1,171 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath,amssymb,enumerate,gastex, makeidx, graphicx,amsfonts, hyperref}
+\begin{document}
+
+\begin{center}
+{\bf{\huge CS 173 }}\\
+{\bf{\huge a.k.a. Discrete Structures}}\\
+\vspace{ 5 cm }
+{\bf{\large Spring 2011, University of Illinos}}\\
+{\bf{\large as taught by Margaret Fleck}}\\
+\vspace{ 1 cm }                         
+{\large notes by Michele R. Esposito}\\
+\vspace{ 5cm }
+Please, let report any error or type-o at \underline{\href{mailto:micheleresposito@gmail.com}{ micheleresposito@gmail.com }}
+
+\end{center}
+
+\newpage
+\tableofcontents
+\newpage
+% =========================================================
+\section{Logic}
+{\bf Converse:} $p \rightarrow q$ becomes $q \rightarrow p$. It is not logically equivalent.\\
+{\bf Contrapositive:} $p \rightarrow q$ becomes $\neg q \rightarrow \neg p$. Logically equivalent.\\
+{\bf Negation implies:} $\neg (p \rightarrow q) \equiv \neg p \vee q$\\
+{\bf De Morgan's Law} $\neg (p \wedge q) \equiv \neg p \vee \neg q$.\\
+$\neg (p \vee q) \equiv \neg p \wedge \neg q$.\\
+
+% =========================================================
+\section{Sets}
+{\bf Definition:} A set is an unordered collection of objects.\\
+{\bf Cardinality:} Is how many objects there are in a set: $A=\{1,3,4\}$ then $|A|=3$.\\
+{\bf Cartesian Product:} A x B= $\{(x,y)| x\in A$ and $y\in B\}$.\\
+{\bf Size of set union:} $|A \cup B|= |A|+|B|$.\\
+{\bf Product rule:} if $|A|=n, |B|=q$ then $|A $x $B|=nq$.\\
+% =========================================================
+
+\section{Number theory}
+{\bf Divisibility} $a$ divides $b$ if $b=an$ for some integer $n$. The short hand for $a$ divedes b is $ a|b$.\\
+{\bf Prime numbers} an integer $q \geq 2$ is prime if the only positive factors of $q$ are $q$ and 1. An integer $q\geq 2$ is composite if it is not prime.\\
+
+{\bf Fundamental Theorem of Arithmetics:} Every integer $\geq 2$ can be written as the product of one or more prime factors. Except for the order in which you write the factors, this prime factorization is unique.\\
+{\bf GCD:} Greatest Common Divisor. The shorthand is gcd(a,b). It is done my taking the prime factors and xracting hte shared factors.\\
+{\bf LCM:} Least Common Multiple. $lcm(a,b)=\frac{ab}{gcd(a,b)}$. If two integers share no factors, $gcd(a,b)=1$ then they are called {\bf relatively prime}.\\
+
+{\bf Congruence mod k:} if $k$ is any positive integer, two integers $a$ and $b$ are congruent mod $k$ (written $a \equiv b (mod k)$) if $k|(a-b)$, thus $a-b=kn$.
+
+% =========================================================
+\section{Relations}
+A relation R on a set A is a subset of $A^2$, thus R is a set of ordered pairs of elements from A.\\
+{\bf Reflexive:} Every element is related to itself. $\forall x\in A, xRx $.\\
+{\bf Irreflexive:} No element is related to itself. $\forall x\in A, x\not R x$.\\
+{\bf Symmetric:} $\forall x,y \in A, xRy \rightarrow yRx$.\\
+{\bf Antisymmetric:} $\forall x,y \in A$ with $x \neq y, if xRy,$ then $y \not R x$.\\
+$\forall x,y \in A, if xRy \wedge yRx,$ then $ x=y$.\\
+{\bf Transitive:} $\forall a,b,c \in A, aRb \wedge bRc \rightarrow aRc$.\\
+{\bf Partial order:} A relation that is transitive, reflexive and antisymmetric.\\
+{\bf Linear (total) order:} is a partial order in which every pair of elements are comparable. That is, $\forall x,y, x\geq y \vee y\geq x$.\\
+{\bf Strict partial order:} is a relation that is irreflexive, antisymmetric and transitive.\\
+{\bf Equivalence relation:} is a relation that is reflexive, symmetric and transitive.\\
+{\bf Equivalence class:} Is the set of all elements related to x. $[x]_R=\{y \in A | xRy\}$.\\
+% =========================================================
+\section{ Functions}
+{\large {\bf Onto}}\\
+{\bf Definition:} A function $f : A \rightarrow B$ is $onto$ or $surjective$ if its image is its whole co-domain. If every element in the co-domain if mapped in the domain. Or, equivalently,
+\begin{center}
+$\forall y\in B, \exists x \in A, f(x)=y$
+\end{center}
+Say you want to compose the function $f : A \rightarrow B$ and $g : B \rightarrow C$. Then $g o f: A \rightarrow C$.
+
+{\large {\bf One-To-One}}\\
+A function is $one-to-one$ or $injective$ if it never assigns two input values to the same output value. Its formal definition is:
+\begin{center}
+$\forall x,y \in A, x\neq y \rightarrow f(x) \neq f(y)$\\
+\end{center}
+or, by taking the contrapositive,
+\begin{center}
+$forall x,y\in A, f(x) = f(y) \rightarrow x=y$\\ 
+\end{center}
+
+% =========================================================
+\section{Graphs}
+Graphs are a very general class of objects. A graph consists of a set of nodes V and a set of edges E. Two nodes connected by an edge are called {\bf neighbors} or {\bf adjacent}.\\
+{\bf Undirected graph:} when edges can be crossed in both directions.\\
+{\bf Simple graph:} If it has neither multiple edges nor loop edges.\\
+{\bf Degrees:} the degree of a vertex $v$, written $deg(v)$ is the number of edges which have $v$ as an endpoint.\\
+{\bf Handshaking Theorem:} $\sum_{v \in V} deg(v)= 2|E|$.\\
+{\bf Complete graph:}$ K_n$ is a graph in which every vertex is connected to another vertex.\\
+{\bf Cycle:} $C_n$. It is a graph that is only a cycle.\\
+{\bf Wheels:} $W_n$ is just like $C_n$ except that it has an additional central "hub" node which is connected to all the others.\\
+{\bf Isomorphism:} An isomorphism from $G_1$ to $G_2$ is a bijection $f: V_1 \rightarrow V_2$ such that vertices $a$ and $b$ are joined by an edge if and only if $f(a)$ and $f(b)$ are joined by an edge.\\
+{\bf Walk:} a walk of legth $k$ from bertex $a$ to vertex $b$ is a sequence of vertices and a sequence of edge that connects them.\\
+ {\bf Closed walk:} if the starting and ending verticies are the same. Otherwise is {\bf open}.\\
+{\bf Path:} A path is an open walk in which no vertex is used more than one.\\
+{\bf Cycle:} Is a closed walk with at least three vertices in which no vertex is used more than once except that the starting and ending vertices are the same.
+{\bf Connected Graph:} A graph is connected if there is a walk between every pair of nodes.\\
+{\bf Cut edge:} An edge that if its cut will increase the number of connected componets.\\
+{\bf Diameter:} Is the maximum distance between any pair of nodes in hte graph.\\
+{\bf Euler circuits:} When there is a closed walk that uses each edge of the graph exactly once. It is possible whenever the degree of every node in the graph is ever.\\
+{\bf Bipartite graph:} Is a graph that can be colored with two colors.
+% =========================================================
+\section{Induction}
+{\bf Hypercube:} A $n$-cube or a hypercube $Q_n$ os the graph of the of the corners and edges of an $n$-dimentional cube.\\
+% =========================================================
+\section{Trees}
+{\bf Definition:} Finite, non-empty set of nodes plus a set of edges. each edge connects each node to its {\bf parent} node.\\
+{\bf Root:} A node with no parent.\\
+{\bf Child:} if x is the parent of y, then y is called a child of x. It z is also a child of x, then y and x are {\bf siblings}.\\
+{\bf Leaf node} is a node that has no children.\\
+{\bf Internal node:} a node that does have a children.\\
+{\bf Levels:} The nodes of a tree can be organized into levels, based on how many edges away from the root htey are.\\
+{\bf Height:} maximum level of any of its node, or maximum length of a path from the root to a leaf.\\
+{\bf m-ary trees:} A m-ary tree is the restriction on how many child a node can have.\\
+{\bf Heap property:} if, for every node X in the tree, the value of X is at least as big as the value in each of X's children.
+
+% =========================================================
+\section{ Big-O}
+{\bf Definition:} f(x) is O(g(x)) if and only if there are positive real numbers $c,k$ such that $0\leq f(x) \leq cg(x), \forall x\geq k$.\\
+{\bf Omega f(x):} $g(x)$ is $\Omega (f(x))$ if and only if $f(x)$ is $O(g(x))$. Which means that if $g(x) \succeq f(x)$.\\
+{\bf Theta g(x):} f(x) is $\Theta (g(x))$ if and only if $g(x)$ is $O(f(x))$ and $f(x)$ is $O(g(x))$. Therefore is the equivalence relation.
+% =========================================================
+\section{Algorithms}
+
+{\large {\bf Linear search} }\\
+Go through the array, find the minimum value.\\
+{\bf Average Case:} $O(n)$.\\
+{\bf Best Case:} $O(n)$.\\
+
+{\large {\bf Binary search}}\\
+Given a sorted array, returns the index of the given value.\\
+{\bf Running time:} $O(\log n)$\\.
+
+{\large {\bf Insertion sort}}\\
+Devide the input array into two pieces and orders it.\\
+{\bf Running time:} $O(n^2)$.\\
+
+{\large {\bf Mergesort}}\\
+Mergesort devides the big input list into smaller pieces, and hten it merges them back together. It is a very stable and very predictable algorithm.\\
+{\bf Running time:} $O(n \log_n)$.\\
+
+{\large {\bf Katatsuba's algorithm}}\\
+First fast algorithm for multiplying big numbers together. It works by breaking up numbers and them multiplieng them together, using the recurrence $T(n)= 3T(\frac{n}{2})+O(n)$, which gives you $O(n^{\log_2 3})$.
+
+% =========================================================
+\section{Sets of Sets}
+{\bf Powerset:} Is th set containing all subsets of A.\\
+{\bf Partition:} when we divide a base set A into non-overlapping subsets, the result is called a $partition$.\\
+{\bf Binomial Theorem:} Let $x$ and $y$ be varibales and let $n$ be any natural number. Then\\
+\begin{center}
+$(x+y)^n=\sum^n_{k=0} {n \choose k}  x^{n-k} y^k$
+\end{center}
+% =========================================================
+\section{Countability}
+{\bf Cardinality:} Two sets A and B have the same cartinality ($|A|=|B|$) if an only if there is a bijection from A to B.\\
+{\bf Countable:} An infinite set A is $countable$ or $countably infinite$ if there is a bijection from $\mathbb{N}$ onto A.\\
+{\bf Cantor Schroeder Bernstein Theorem:} $|A| \leq |B|$ if and only if there is a one-to-one function from A to B. Then if $|A| \leq |B|$ and $|B| \leq |A|$, $|A|=|B|$.
+
+ % =========================================================
+\section{Planar Graphs}
+{\bf Definition:} A planar graph is a graph which can be drawn in hte plane without any edges crossing.\\
+{\bf Degree of a face} is the length of its boundary, how many edges it has.\\
+{\bf Euler's formula:} $v-e+f=2$.\\
+{\bf Handshaking theorem for faces:} sum of the faces degrees is also 2$e$.\\
+{\bf Free tree:} Any connected graph with no cycles.\\
+{\bf Corollay of Euler's formula:} In a graph where $v \geq 3, e \leq 3v-6$.\\
+{\bf Subdivision:} In a graph G a $subdivision$ of another graph F is G just like F except that you've divided up some of F's edges by adding vertces in the middle of them.\\
+{\bf Homeomorphic:} Two graphs are $homeomorphic$ if one is a subdivision of another, or they are both subdivision of some third graph.\\
+{\bf Kuratowski's theorem:} A graph is nonplanar if and only if it contains a subgraph homeomorphic to $K_{3,3}$ or $K_5$.\\
+ % =========================================================
+
+\end{document}

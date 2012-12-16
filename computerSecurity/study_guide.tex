@@ -1,0 +1,292 @@
+\documentclass[a4paper,1pt]{article}
+\usepackage{amsmath,amssymb,enumerate, graphicx,amsfonts}
+\usepackage{enumitem}
+\renewcommand{\labelitemi}{\tiny$\blacksquare$}
+
+\setlength{\parskip}{0pt}
+\setlength{\parsep}{0pt}
+\setlength{\headsep}{0pt}
+\setlength{\topskip}{0pt}
+\setlength{\topmargin}{0pt}
+\setlength{\topsep}{0pt}
+\setlength{\partopsep}{0pt}
+
+\usepackage{listings}
+\lstset{language=C}
+\usepackage[top=.1 cm, bottom=.1cm, left=.1cm, right=.1cm]{geometry}
+\begin{document}
+% =========================================================
+\subsubsection{Risk analysis} % (fold)
+\label{sub:Risk analysis}
+\begin{tabular}{| c | c | c | c |}
+  \hline
+  {\bf Quantitative} & Assign real numbers to costs & Annual loss exposure & probability of an event occurring \\
+  \hline
+  {\bf Qalitative} & Judges relative risk to threads & Based on intuition, judgement, experience& subjective, no hard numbers \\
+  \hline
+\end{tabular} \\
+\begin{tabular}{| c | c| c | c |}
+  \hline
+  {\bf Avoid risk} & implement a control or $\Delta$ design & {\bf Assume} & detect, recover. Plan 4 fall out \\
+  \hline
+  {\bf Transer risk} & $\Delta$ design to introduce $\neq$ risk $\lor$ Buy insurance & {\bf Reduce likelihood} & reduce chance of risk\\
+  \hline
+  {\bf Reduce conseq} & Reduce the downside of risk occurrence. \\
+  \hline
+\end{tabular}
+% subsubsection Risk analysis (end)
+\subsubsection{Cyphers} % (fold)
+\label{sec:Cyphers}
+{\bf Summary Symmetric Encryption Algorithms} \\
+\begin{tabular}{|c | c | c | c| c | c |}
+  \hline
+(bits)  & {\bf DES} & {\bf 3DES} & {\bf AES} & {\bf Type of attack} & {\bf Know to cryptanalyst}\\
+  \hline
+  {\bf Plaintext block} & 64 & 64 & 128 &  Ciphertext only & Ecryption algorithm (EA), Ciphertext (C)\\
+  \hline
+  {\bf Ciphertext block} & 64 & 64 & 128 & Known plaintext & EA, C, $1 \geq$ $P-C$ pairs formed w key\\
+  \hline
+  {\bf Key size} & 56 & 112 or 168 & 128, 192 or 256 & Chosen plaintext & EA,C, P chosen by crypta, corresponding C\\
+  \hline 
+  & & & & Chosen ciphertext & ciphertext chosen by crypta. and decrypted $P$ generated w $K$ \\
+  \hline
+  & & & & Chosen text & EA, C, chosen $P$ and chosen $C$ \\
+  \hline
+\end{tabular} \\
+{\bf Fiesel Cipher structure}: It is a structure that many symmetric block encryption algorithms use. The inputs to the enc. alg. 
+{\bf DES:} $|P|=64b,|K|=56b$. $\exists$ 16 rounds of processing. From the original $56b$ $K$, 16 subkey are generated, which are used for every round. Decryption is essentailly the $=$. Use the $C$ as input, but subkeys $K_i$ in $R$ order. 
+{\bf 3DES:} $C=E(K_3,D(K_2,E(K_1,p))) \land P=D(K_1,E(K_2,D(K_3,C)))$. 3DES is very strong, however it is very slow! 
+{\bf AES:} Iterative cipher, does not use Fiesel network. Its algorithm processes data as 4 groups of 4 bytes, called states. then applies 9/11/13 rounds in which state undergoes: \emph{Byte substitutions, shift rows, mix columns, add round key}. All this
+operations can be combined into XOR or table lookups, so its very fast. Description is the same but inverse. 
+{\bf RC4 Alg.} RC4 is a stream cipher designed by RSA. It is a variable-key-size stream cipher with B-oriented operation. The algorithm is based on the use of a random permutation. Its period is $>$ than $10^{100}$. 
+{\bf RSA algorithm}:\\
+\begin{tabular}{| c | c | c | c | c | c | }
+  \hline
+  {\bf Key generation} & p,q prime, $p\neq q$ & $n =pq$ & $\phi(n)=(p-1)(q-1)$ & $e$ s.t. $gcd(\phi(n),e)=1$ \\
+  $d$ s.t. $de\text{ mod }\phi(n)=1$ & PK= $[e,n]$ & PK= $[d,n]$.\\
+  \hline
+  {\bf Encryption} & Plaintext: $M < n$ & C: $C=M^e \text{ mod }n$ & {\bf Decription} & Plaintext= $M=C^d (\text{ mod }n)$\\
+  \hline
+\end{tabular} \\
+{\bf Diffie-Hellman}: \\
+the purpose of the alg. is to enable two users to exchange a secret key securely that can then be used for subsequent encryption of messages. The alg. itself is limited to the exchange of the keys. \\
+\begin{tabular}{| c | c | c | c | c|}
+  \hline
+  {\bf Global public elements} & {\bf UA K Generation} & {\bf UB K Generation} & {\bf Gen. Secret K by UA} & {\bf gen. Secret K by UB} \\
+  $p$ prime & Priv. $X_a<q$ & Priv. $X_b < q$ & $K=(Y_B)^{X_A} \text{ mod } q$ &$K=(Y_A)^{X_B} \text{ mod } q$  \\
+  \hline
+  $\alpha<q$ primite root of $q$ & Public $Y_A=\alpha^{X_A}\text{ mod }q$ &Public $Y_B=\alpha^{X_B}\text{ mod }q$ \\
+  \hline
+\end{tabular}
+{\bf Birthday attack}:
+Works like this. Opponent generates $\frac{2^m}{2}$ variations of a valid message w same meaning. Then, generates $\frac{2^m}{2}$
+variations of a desired fraudolent message. Chance he finds a collision is $\frac{1}{2}$ by b-day paradox. \\
+%SECURE HASH FUNCTINOS! (fold)
+\underline{{\bf Secure Hash function requirements}}
+{\bf (1)} item H can be applied to a block of data of any size.
+{\bf (2)} H produces a fixed- length output
+{\bf (3)} $H(x)$ is relatively easy to compute for any given $x$, making both hardware and software implementations practical
+{\bf (4)} For any given code $h$, it is computationally infeasible to find $x$ such that $H(x)=h$. A hash function with this property is referred to as {\bf one-way} or {\bf preimage resistant}.
+{\bf (5)} For any given block $x$, it is computationally infeasible to find $y \neq x$ with $H(y)=H(x)$. This is called {\bf second preimage resistant}
+{\bf (6)} It is computationally infeasible to find $(x,y)$ s.t. $H(x)=H(y)$ \\
+% SHAA!!
+\begin{tabular}{| c | c | c | c | c |}
+  \hline
+  & {\bf Sha-1} & {\bf Sha-256}& {\bf Sha-348} & {\bf Sha-512} \\
+  \hline
+  Message size & $<2^{64}$ & $<2^{64}$ & $< 2^{128}$ & $<2^{128}$ \\
+  \hline
+  Block size & 512 & 512 & 1024 & 1024 \\
+  \hline
+  Security (b-day attack) & 80 & 128 & 192 & 256 \\
+  \hline
+\end{tabular}
+%(end)
+{\bf Cipher Block Modes of Operation} % (fold)
+\label{sub:Cipher Block Modes of Operation}
+A symmetric block cipher processes one data at the time. You need a ways of breaking the plaintext into blocks.  \\
+\begin{tabular}{| c | c | c|}
+  \hline
+  {\bf Mode} & {\bf Description } & {\bf Typical Application} \\
+  \hline
+  Electronic Code Book & Each block of 64 plaintext bits is encoded & Secure transmission of single values \\
+  (ECB) & independently using the same key. & \\
+  \hline
+  Cipher block &  The input to the enc. alg. is the XOR  of the next  & General-purpose block-oriented \\
+  Chaining (CBC) &64 bits of plaintext and the preceding 64 bits of cipher text& transmission, Authentication \\
+  \hline
+  Cipher & Input is processed $s$ bits at a time. Preceding ciphertext is used & General-purpose block-oriented \\
+  Feedback &as input to hte enc. alg. to produce pseudoramdom output, & transmission \\
+  (CFB) & which is XORed with plaintext to produce next unit of ciphertext  & Authentication \\
+  \hline
+  Counter Mode & Each block of plaintext is XORed with an encrypted counter. & General-purpose block-oriented transmission \\
+  & The counter is ++ for each subsequent block & High-speed requirements \\
+  \hline
+\end{tabular}
+% subsubsection Cipher Block Modes of Operation (end)
+% section Cyphers (end)
+\subsubsection{Access Control} % (fold)
+\label{sub:Access Control}
+  {\bf Authentication}: verification that the claimed identity of a user or other system entity is valid. 
+  {\bf Authorization}: Granting of a right or permission to a system entity to access a system resource. Determines trust 
+  {\bf Audit}: Independent review and examination of sys records and activities to test for adequacy of sys controls, ensure compliance and detect breaches. 
+\underline{{\bf Discretionary Access Control}}
+Scheme in which an entity may be granted access rights that permit the entity,to enable another entity to access some resource. An {\bf Access matrix}, tell who can do what to which files. If cut by columns, then {\bf Access control lists}. If cut by row, {\bf Capability tickets}. A {\bf subject} is an entity capable of accessing objects. 
+\underline{{\bf Role-Based Access Control}} 
+RBAC is based on the roles that users assume in a system rather than the user's identity. It redefines a role as a job function within an organization. Then, those roles are put in an ACM like in DAC. \\
+\begin{tabular}{| c | c | c | c | c |}
+  \hline
+  {\bf Models} & {\bf Hierar} & {\bf Const} & {\bf Entity} & {\bf Definition} \\
+  \hline
+  RBAC$_0$ & No & No & {\bf User} & individual that has access to this comp. sys. Each user has an user ID \\
+  \hline
+  RBAC$_1$ & Yes & No & {\bf Role} & Named job function within the organization. $\forall$ jobs $\exists$ a description of the authority of user.\\
+  \hline
+  RBAC$_2$ & No & Yes & {\bf Permission} & Approval of particular mode of access to one or more jobs.  \\
+  \hline
+  RBAC$_3$ & Yes & Yes & {\bf Session} & A mapping btw a usr and an activated $\subset$ of the $\left\{  \right\}$ of roles to which the user is assigned.\\
+  \hline
+\end{tabular} \\
+{\bf Constrains:} Means of adapting RBAC to the specifics of administrative and security policies in an organization. A constrain a a defined relationship among roles $\lor$ a condition related roles. $\exists$ following types: \\
+\begin{tabular}{| c | c}
+  \hline
+  {\bf Mutually exclusive roles} & user can be assigned only one role in the $\left\{  \right\}$. Can be static $\lor$ dynamic. Thus, non overlapping permission. \\
+  \hline
+  {\bf Cardinality }  & Setting a max. $\#$ with respect to roles. Usr can only be assigned to a given role. Also, set max $\#$ of roles can be granted to perm. \\
+  \hline
+  {\bf Prerequisite} & Usr can only be assigned to a particular role if it has some prerequisites. Useful to give structure. \\
+  \hline
+\end{tabular}
+% subsubsection Access Control (end)
+\subsubsection{Database security} % (fold)
+\label{sub:Database security}
+\begin{tabular}{| c | c | c | c |}
+  \hline
+  {\bf Making Queries} & Select Name, UID, Financial aid from Students & {\bf Create Views} & \emph{create view} view$\_$name \emph{as} query$\_$definition; \\
+  \hline
+  {\bf Grant sytanx} & \emph{grant} privilege$\_$list \emph{on} resource \emph{to} user$\_$list; & {\bf Revoke} & \emph{revoke} privilege \emph{on} resource \emph{from} user \\
+  \hline
+  {\bf Row-Level AC} & \emph{create view} employee \emph{as select * from} & \emph{grant select on} & employee$\_$Carol \emph{to} carol;\\
+  & employee \emph{where} name = 'Carol'&   \\
+  \hline
+  {\bf Delegate Policy} & \emph{grant} privilege \emph{on} resource \emph{to} user \emph{with grant option} & {\bf Inference} & Use non-sensitive data to deduce sensitive data\\
+  \hline
+  {\bf Indirect Inference} & work with statistical results to obtain data & if set too small & server doesn't give data.\\
+  \hline
+\end{tabular}
+{\bf Database encryption} makes data to be stored and retrieved encrypted. Queries are made over encrypted data, that never gets decrypted on the server. The problem though is that key management in such a model is simply a mess, as well as queries.
+% subsubsection Database security (end)
+\subsubsection{SSL-IPsec} % (fold)
+\label{sub:SSL-IPsec}
+{\bf SSL} is a transport layer security, designed to procide confidentiality, integrity and authentication at the end points. The internet protocol version is called {\bf TLS}. \\
+\begin{tabular}{| c | c | c |}
+  \hline
+  {\bf SSL Session } & {\bf SSL Connections} & {\bf Decomposition} \\
+  \hline
+  Association btw client and server & transport-L connection & Ethernet frame Header(H) \\
+  \hline
+  Created by Handshake protocol & Protentially many connections per session & IP Header \\
+  \hline
+  Defines set of crypto. sec. parameters & Share crypt. par. of session & TCP Header \\
+   & & TCP data stream, encrypted and authenticated \\
+  \hline
+\end{tabular}
+% subsubsection SSL-IPsec (end)
+\subsubsection{Key management} % (fold)
+\label{sub:Key management}
+{\bf Digital Signatures:} Scheme for demonstrating the authenticity of a digital message or document. You can do so by picking good session key, which are used for bulk encryption. However, it is hard to do so, because they are based off \emph{pseudo-random numbers}. Another way of doing this is {\bf Trusted Third Party}, which allow you to exchange key with ease. \\
+  {\bf Kerberos:} Authentication protocol, which works on the basis of ``tickets'' to allow nodes communicating over a non-secure network to prove their identity to one another in a secure manner. its designers aimed primarily at a \emph{client-server} model, and it provides \emph{mutual authentication}. Kerberos protocol messages are protected against eavesdropping and replay attacks. \\
+{\bf Web of trust:} Used in PGP, GnuPG, to establish the authenticity of the binding between a public key and its owner. Its decentralized trust model is an alternative to the centralized trust model of {\bf Public Key Infrastructure (PKI)} which relies exclusively on a certificate authority. However, you still have the problem of how to manage the root.
+% subsubsection Key management (end)
+\subsubsection{Authentication} % (fold)
+\label{sub:Authentication}
+{\bf Authentication:} Binding of identity to subject. Involves two steps: \underline{Identification:} present identifier to security system. \underline{Verification:} Present authentication information to bind identity. \\
+{\bf Markov Model:} Reduce space requirements of bad password list. Create model that represents the bad password database, created from trigrams from words in bad password list. \\
+{\bf Bloom Filter} :
+$\neq$ way of encoding bad pswd dictionary in a small cheap DS. Create $N$ bit array, and use $k$ independent hash functions which hash into a space of $0$ to $N-1$. $\forall$ $h(x)$, set the corresponding bit in the hash table to every hash value. \\
+{\bf Rainbow Table} :
+Is a precomputed table for reversing cryptographic hash functions, usually for cracking password hashes. Tables are usually used in recovering plaintext passwords. Trades space for processor.\\
+{\bf Salt Value} :
+Random number added to the password to make offline cracking harder.  \\
+{\bf Shadow password files}:
+Hashed passwords kept in a separate files from the user ID. \\
+{\bf One-Time pswd:} pswd that can only be used once, than invalidated. \underline{Problem} is synchronization of user, system, generation of good random pswd and distributing them. \\
+
+% subsubsection Authentication (end)
+\subsubsection{Mandatory Security Policies}
+{\bf DAC:} Normal usr can $\Delta$ AC state assuming they have permission. It is at the discretion of the user. {\bf MAC:} Access decisions cannot be $\Delta$ by normal rules. Generally enforced by system wide set of rules. Normal usr cannot $\Delta$ ACS. Stronger protection.{\bf Confidentiality Policy:} Prevent the unauthorized disclosure of information. {\bf Simple Security P.:} No read up. Subj. can only read iff level(O) <= level(S).{\bf No write down:} Star p., subject can only write to Level(S) <=Level(O). {\bf Adding Sec. clearance flexibility:} Define max and current level for subjects.{\bf Principle of tranquility} Raising object's security level. Information once available so some subjects is no longer available..{\bf Strong tranquility} The clearances of subjects and the classification of objects do not $\Delta$. {\bf Weak tranq} The clearance $\Delta$ according to specified policy. For the next table: Subjects $S$, objects $O$, integrity levels $I$, relation $\leq I\times I$ holding when second dominates \\
+\begin{tabular}{| c | c | c |}
+  \hline
+  {\bf Biba integrity model}& {\bf Strict Bell LaPadula} & {\bf Low-Water-Mark policy  }\\
+  $min:I\times I \rightarrow I$= lesser of lvls & $s \in S$ can read $o\in O$ iff $i(s)\leq i(o)$    & S can w to o iff $i(o)\leq i(s)$ \\
+  \hline
+  $i:S\cup O \rightarrow I$ gives integrity of entity & $s\in S$ can w to $o$ iff $i(o)\leq i(s)$& if s reads o, then $i'(s)=min(i(s),i(o))$ \\
+  \hline
+  $r \subseteq S\times O$ means can read. & $s_1$ can ex $s_2$ iff $i(s_2)\leq i(s_1) $ & $s_1$ can ex $s_2\in S$ iff $i(s_2)\leq i(s_1)$.\\
+  \hline
+\end{tabular}
+
+%
+%
+\subsubsection{Trusted systems and examples}
+{\bf Definition}: System that employs sufficient HW and SW to assure mechanisms to allow its use for simultaneous processing of a range of sensitive or classified info. Implements strong security mechanisms.{\bf Trusted Computing Base} TCB contains elements of HW and SW that enforce security. Must be tamper proof, and cannot be circumvented. {\bf Memory Protection rings:} Assign different security levels to memory, one for each program. {\bf Privilege levels:} CPU enforces on memory access and $\Delta$ of control between $\neq$ programs of $\neq$ privilege. Also enforced by HRDW, so malicious code can't jump into kernel space. {\bf Stack switching} Happens when calling more privileged code. Prevents less privileged code from passing in short stack and crashing more privileged code.{\bf Hardware rings} usually only two installed. Implements limiting memory access.{\bf Trusted Computing Group} Consortium developing standards for computer architectures using secure co-processors. {\bf TPM basics:} TPM stores a number  of key pairs. Has protected storage and can be used to boot strap security locally. {\bf Certification services} They measure values of data, as well as the digest of hashes. {\bf Integrity reporting} ensures the authenticity of stored values based on trusted platform identities.{\bf Usage scenarios:} Store root secrets in secure co-processor. In an enterprise, IT group is responsible for machien admin. Ensure platform is in particular configuration.
+\subsubsection{Malware overview}
+{\bf 0 Day Exploit} exploit that has not been patched yet.{\bf Malicious code:} set of instructions that cause a site's sec. pol. 2 be violated. \\
+\begin{tabular}{| c | c | c | c|}
+  \hline
+ {\bf Virus} & Attaches to prgrm and copies to other prgrm & {\bf Trojan Horse} & Unexpeced, additional $f$. \\
+  \hline
+  {\bf Logic Bmb} & Triggers action when condition occ. & {\bf Logic bomb} & Triggers action when time occurs \\
+  \hline
+  {\bf Trap door} & Allows unauthorized access to funct. & {\bf Worm} & Propagates copies through a network \\
+  \hline
+  {\bf Rabbit} & Replicates itself w/o limit to exhaust resources & {\bf Netbot} & Trapdoor prgr controlled through network \\
+  \hline
+  {\bf Root Kit} & hooks standard OS calls to hide data & & \\
+  \hline
+\end{tabular}\\
+{\bf Rootkit:} replace function table entries, $\Delta$ syscalls. Hard to defend. {\bf Virus parts:} (1) Infection mechanism (2) Trigger (3) payload.{\bf Macro virus} Macro code attached to some data file. Interpreted by program using the file. {\bf \underline{Virus scanners}}:\\
+\begin{tabular}{|c | c | c | c |}
+ \hline
+ {\bf 1st} & Check signature virus by patterns of code. Rec only known sign & {\bf 2nd} & use heuristics rather than signatures \\
+ \hline
+ {\bf 3rd } & Track virus by action. Look 4 anomalous behaviour & {\bf 4th } & Use scanning, Acces control, Behavioural analysis \\
+ \hline
+\end{tabular}\\
+{\bf Worms:} Spread themselves through the network. Uses scanning to send packets to random addresses. {\bf Botnets:} Install on compromised machines. Master sends commands to bots, can control through P2P masked connections.
+\subsubsection{Network and DoS}
+{\bf DoS:} Basic: use simple flooding ping. Higher capacity link floods lower capacity link. {\bf Address spoofing} Sender can put any source address in packets he sends. Some routers can catch some spoofing by using reverse path or egress filtering. {\bf ARP} unsed to discover mapping of neighboring ethernet MAC to PI addresses. {\bf ARP cache poisoning} bootstrap problem w respect to security. Use man-in-the-middle attack. However, can encrypt traffic to avoid problem. {\bf Smurf attack}: an amplification DoS. Send ICMP echo request to IP broadcast addresses. Spoof the victim's address as he source. {\bf Transport level - TCP and UDP} Service to service communication. {\bf Syn flood} resource DoS attack focused on the TCP three-way handshake. flood the SYN table w messages.
+{\bf DNS problems:}\underline{DNS open relays} Makes it look like good DNS server is authoritative server to bogus name. \underline{DNS Cache poisoning} $\Delta$ the name of addrs mapping to attacker address. {\bf DNS communication} Use UDP. Requests and responses have matching 16 bit. Requests and responses have matching 16 bit transaction Ids.
+\subsubsection{Software security}
+{\bf Sec in design:} Concerns must be considered up front, as they impact system arch. Can't do it in test phase.{\bf Defensive programming:} The goal is to provide continued functioning of software in spite of unforeseeable usage of the software. Don't make any assumption about ur system. {\bf Handling User Input:} must verify the input, and its length. can use a white list of expected results.{\bf Injection attacks:} Error in input handling that results in unexpected execution flow.  Often occurs in scripting languages.{\bf XSS} Inject malicious code into web pages. Need to validate data supplied in order to avid this kind of attack. {\bf Input fuzzing} Generate ``random'' inputs to test the program. {\bf Writing correct code} Is you algorithm correct? TCP session hijacking. {\bf Correct use of memory} Ensure no memory leaks, no malloc errors. use heap randomization and tools to track heap utilization
+\subsubsection{Buffer Overflow}
+Overwrite saved return address to its convenience. {\bf Shellcode}: hex value of a program to call a shell w high privileges. Cannot use bytes w NULL value. {\bf Defenses:} Compile-time include: Programming language choice, extensions/ safe libraries and stack protection. Run-time include executable address space protection, address space randomization.
+\subsubsection{Intrusion Detection}
+{\bf Intruders!} Masquerader: they pretend to be legitimate users. Misfeasor: legitimate user behaving badly. Clandestine: seizes prvileged control of the system. Able to clan up audit logs and evade access controls. {\bf Intrusion detection} \emph{Anomaly:} use statistical techniques to determine unusual behaviour. \emph{Mis-use} use signatures to determine occurrence of known attacks. Detection can be performed on host data \&,or network data.{\bf Bad detections} \underline{false positive}: detect activity as an intrusion. Reduce by loosening intrusion detection rules. \underline{False negative} miss reporting bad behavior as intrusion. {\bf IDS architecture} agent/sensors run at @ lowest level gathering data. Perform basic processing. Then, sends to analyzer that performs more significant processing of the data. Potentially there is a hierarchy of agents and directors.{\bf Data sources:} Direct: network packets, system calls.\underline{indirect} syslog, events from other intrusion, network info generated by routers. {\bf Mis-use detection} uses viruses detection techniques to detect bad behaviour. signatures are created by analyzing historical data. {\bf Intrusion protection systems} Requires very fast signature handling. it is a type of NIDS. {\bf honey pot:} deplu a fake system, observes it being attacked. It is a resource management. 
+\subsubsection{Firewalls}
+{\bf Goal:} insert \emph{after the fact security} ba wrapping or interposing a filter on network traffic. {\bf Requirements:} all traffic btw section A and section B must pass through FWL. Only auth traffic is allowed to pass, and the FWL is immune to penetration. {\bf Packet filter firewall} Can block traffic based on source, destination address, ports and protocol.{\bf Stateful inspection FWL} evolved as packet filters aimed for proxy functionality.can also reconstruct layer 4 traffic. This type of FWL can be expansive.{\bf Application Proxy FWL:} firewall software runs in apps space on the firewall. The traffic source must be aware of the proxy and add an additional header. 
+\subsubsection{Design principles}
+\begin{tabular}{| c | c | c |}
+  \hline
+  {\bf Economy of Mechanism} & {\bf Fail-safe default} & {\bf Complete mediation} \\
+  Keep design as simple as possible & Base access on permission, no exclusion & $\forall$ access to $\forall$ obj must be checked  \\
+  simpler = less can go wrong & If prot. sys fails, everybody is denied. & if permission $\Delta$ after, get unauthorized access \\
+  \hline
+  {\bf Open design} & {\bf Separation of Privilege} & {\bf Least privilege} \\
+  \emph{The design should not be secret} & 2 keys is more robust than 1 key & \emph{$\forall$ program, user of sys should operate} \\
+ don't depend on ignorance of attacker, & separation of duty  &\emph{w least set of privileges to complete the job} \\
+  on possession of specific keys or passwords & defence in depth & minimal protection domain \\
+  \hline
+  {\bf Least Common Mechanism} & {\bf Psychological Acceptability} & {\bf Key points} \\
+  minim. amount of mech cmn to $>$1 usr & Its esntl that the human  & require: \\ 
+  shared mechnism have $>$ insrnc  & interface be designed 4 ease & careful analysis\\
+  than non shared & of use, so can be user routinely & careful implementation \\
+  \hline
+\end{tabular}
+\subsubsection{Privacy enhancing technologies}
+{\bf What is privacy?} ``The right to be let alone''.  {\bf What is anonymity?} Unobservability, unlinkability, sender anonymity and receiver anonymity. {\bf Chaum's MIX} uses public key cryptography for anonymous e-mail. Provides unlinkability. {\bf MIX cascade} what if some of the mixes are controlled by adversaries? then a cascade of mixes can withstand N-1 adversaries. {\bf Random routing}: hide message source through random routing. Routers don't know who the source message is. {\bf Onion routing} sender chooses a random sequence of routers. Goal: hostile routers shouldn't learn Alice is talking to bob. Do so by using multiple encryption levels. {\bf Crowds} Routers form a random path. Now, routers choose path, not sender. $\forall$ routers, if $(flip(p))$, the router forwards to another router, else forwards the message to the recipient.{\bf Probabilistic notions of anonymity} Has to be beyond suspicion: the observed source of the message is no more likely to be the true sender than anybody else. Probable innocence and possible innocence: non-trivial probability that the observed source of the message is not the true sender. {\bf Digital cash} anonymous payment system, which uses blind signatures in order to cover up.
+\subsubsection{Side channels}
+{\bf Side channel} Information disclosure through \emph{physical} properties of implementation. {\bf Timing attacks} execution time of operations varies depending on data. Attacker can measure timing, recover secret information.{\bf RF noise} Computers emit RF, with high-gain antenna, can monitor activity from a distance {\bf Power analysis} computers & electronics leak information through power. Power analysis is especially useful for smart cards. {\bf Stenography} greek for covered writing. embed hidden message in other communication. \underline{can use:} spaces, word length, timings, low bits of images/audio. {\bf Secure deletion} how do you make sure a file is really gone? must eradicate all copies.{\bf Disk level issues} magnetic infromation persits after overwrite. a better approach is to never write confidential data to disk.
+\subsubsection{Security Audit}
+{\bf Security audit} Independent review and examination of a system's records and activities to determine the adequacy of system controls.{\bf Trail} chronological record of system activities that is sufficient to enable the reconstruction and examination of the sequence of environments and activities.{\bf Logging} Application or system logging events. Create security trail. \underline{things to log:} |session initialization |Auth.info | Auth. decisions |Network connections. {\bf Audit event analysis} Need to log enough info to review correct enforcement. Some events dictated by need to comply w laws. timestamped.{\bf Network security events} Ntwk device generates syslog messages. Intrusion detection device creates events. {\bf Ensuring applications audit} Review/rewrite application to insert audit log calls. Interpose library. Use dynamically linked library to audit then perform the original library call. {\bf Audit analysis} originally envisioned to be directed human analysis. Baselining, you try to understand the time of audit events generated in normal situations.{\bf Conlusion} audit trail is necessary, and tends to be overlooked. No direct functional benefit and essential to determine that things are operating per security requirement.
+\end{document}
