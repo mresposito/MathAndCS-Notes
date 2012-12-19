@@ -8,16 +8,21 @@ Please note that I have not created the material in these notes. All the merit f
 Discrete Structures - CS 173
 ----------
 I took this class in Spring 2011, the professor was Margaret Fleck. This notes are mainly a collection of formulas and definitions used in the class.
-Computer Security - CS 461
+Data Structures - CS 225
 ---------
-In the exams of this class, we were allowed to bring a paper with anything written on, front and back. I think the professor underestimated the power of LaTeX, as I was able to fit so much information in just two pages. I think I learned more about latex than the class itself while doing this study guide.
+I had the pleasure to take this class with Cinda Heeren, an excellent professor. Unfortunately, I did not take good notes while I was taking the class in Spring 2011. I put together these notes as I find very useful to have a good reference of data structures, plus it is an excellent way to get the material back in my mind. A lot of the material here is drawn from lecture notes and Wikipedia.
+*Notes in progress*
+System Programming - CS 241
+---------
+This is a study guide I had created for one of the midterms. We were provided with a series of questions, and I managed to answer them all in this study guide. Interesting overview of many operative systems topics.
+
 Theory of Computation - CS 373
 ---------
 I took this class in Spring 2012, with Steve LaValle. This has been so far my favorite class in college. Both the materials and the professor were wonderful. 
 I highly recommend reading over the Halting Problem, as the proof is simply genial. One of my favorite pieces of Mathematics ever created. Thank you, Mr. Turing!
-System Programming - CS 241
+Computer Security - CS 461
 ---------
-This is a study guide I had created for one of the midterms. We were provided with a series of questions, and I managed to answer them all in this study guide. Interesting overview of many operative systems topics.
+In the exams of this class, we were allowed to bring a paper with anything written on, front and back. I think the professor underestimated the power of LaTeX, as I was able to fit so much information in just two pages. I think I learned more about latex than the class itself while doing this study guide.
 
 Probability - Math 461
 ---------
